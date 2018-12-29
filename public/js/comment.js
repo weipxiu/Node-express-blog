@@ -4,7 +4,7 @@ var pages = 0;
 var comments = [];
 
 //提交评论
-$('#messageBtn').on('click', function() {
+$('#messageBtn').on('click', function(e) {
     $.ajax({
         type: 'POST',
         url: '/api/comment/post',

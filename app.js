@@ -20,7 +20,7 @@ var User = require('./models/User');
 
 //设置静态文件托管
 //当用户访问的url以/public开始，那么直接返回对应__dirname + '/public'下的文件
-app.use( '/public', express.static( __dirname + '/public') );
+app.use('/public', express.static(__dirname + '/public'));
 
 //配置应用模板
 //定义当前应用所使用的模板引擎
@@ -31,48 +31,50 @@ app.set('views', './views');
 //注册所使用的模板引擎，第一个参数必须是 view engine，第二个参数和app.engine这个方法中定义的模板引擎的名称（第一个参数）是一致的
 app.set('view engine', 'html');
 //在开发过程中，需要取消模板缓存
-swig.setDefaults({cache: false});
+swig.setDefaults({ cache: false });
 
 //bodyparser设置
-app.use( bodyParser.urlencoded({extended: true}) );
+app.use(bodyParser.urlencoded({ extended: true }));
 
 //设置cookie
-app.use( function(req, res, next) {
-    req.cookies = new Cookies(req, res);
+app.use(function(req, res, next) {
+  req.cookies = new Cookies(req, res);
 
-    //解析登录用户的cookie信息
-    req.userInfo = {};
-    if (req.cookies.get('userInfo')) {
-        try {
-            req.userInfo = JSON.parse(req.cookies.get('userInfo'));
+  //解析登录用户的cookie信息
+  req.userInfo = {};
+  if (req.cookies.get('userInfo')) {
+    try {
+      req.userInfo = JSON.parse(req.cookies.get('userInfo'));
 
-            //获取当前登录用户的类型，是否是管理员
-            User.findById(req.userInfo._id).then(function(userInfo) {
-                req.userInfo.isAdmin = Boolean(userInfo.isAdmin);
-                next();
-            })
-        }catch(e){
-            next();
-        }
-
-    } else {
+      //获取当前登录用户的类型，是否是管理员
+      User.findById(req.userInfo._id).then(function(userInfo) {
+        req.userInfo.isAdmin = Boolean(userInfo.isAdmin);
         next();
+      });
+    } catch (e) {
+      next();
     }
-} );
+  } else {
+    next();
+  }
+});
 
 /*
-* 根据不同的功能划分模块
-* */
+ * 根据不同的功能划分模块
+ * */
 app.use('/admin', require('./routers/admin'));
 app.use('/api', require('./routers/api'));
 app.use('/', require('./routers/main'));
 
 //监听http请求
-mongoose.connect('mongodb://localhost:27018/blog', function(err) {
+mongoose.connect(
+  'mongodb://localhost:27018/blog',
+  function(err) {
     if (err) {
-        console.log('数据库连接失败');
+      console.log('数据库连接失败');
     } else {
-        console.log('数据库连接成功');
-        app.listen(8081);
+      console.log('数据库连接成功');
+      app.listen(8081);
     }
-});
+  }
+);

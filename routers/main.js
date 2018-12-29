@@ -1,5 +1,5 @@
 /**
- * Created by 毅 on 2016/8/28.
+ * 首页模块
  */
 
 var express = require('express');
