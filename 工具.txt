@@ -1,4 +1,5 @@
-¿ÉÊÓ»¯Á´½Ómongodb£ºhttps://robomongo.org/download
-mangodb¹ÙÍø£ºhttps://www.mongodb.com/download-center/community
-ÕËºÅ£º3430449466@qq.com
-ÃÜÂë£º@xxxx
+å¯è§†åŒ–é“¾æ¥mongodbï¼šhttps://robomongo.org/download
+mangodbå®˜ç½‘ï¼šhttps://www.mongodb.com/download-center/community
+è´¦å·ï¼š3430449466@qq.com
+å¯†ç ï¼š@xxxx
+mongod --dbpath=E:\personal\Node-express-blog\db --port=27018
