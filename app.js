@@ -45,6 +45,9 @@ app.use(function(req, res, next) {
   if (req.cookies.get('userInfo')) {
     try {
       req.userInfo = JSON.parse(req.cookies.get('userInfo'));
+      //username是base64编码的字符串
+      req.userInfo.username = new Buffer(req.userInfo.username, 'base64').toString();
+
 
       //获取当前登录用户的类型，是否是管理员
       User.findById(req.userInfo._id).then(function(userInfo) {
@@ -68,13 +71,13 @@ app.use('/', require('./routers/main'));
 
 //监听http请求
 mongoose.connect(
-  'mongodb://localhost:27018/blog',
+  'mongodb://localhost:27017/blog',
   function(err) {
     if (err) {
       console.log('数据库连接失败');
     } else {
       console.log('数据库连接成功');
-      app.listen(8081);
+      app.listen(8080);
     }
   }
 );

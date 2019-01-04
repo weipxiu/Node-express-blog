@@ -109,6 +109,7 @@ router.post('/user/login', function(req, res) {
       return;
     }
     //用户名和密码是正确的
+    console.log(userInfo)
     responseData.message = '登录成功';
     responseData.userInfo = {
       _id: userInfo._id,
@@ -118,11 +119,13 @@ router.post('/user/login', function(req, res) {
       'userInfo',
       JSON.stringify({
         _id: userInfo._id,
-        username: userInfo.username
+        username: new Buffer(userInfo.username).toString('base64')
       })
     );
     res.json(responseData);
     return;
+  }).catch(function(err){
+    console.log(err)
   });
 });
 

@@ -87,7 +87,7 @@ $(function() {
         type: 'get',
         url: '/views',
         data: {
-            contentid: '5c272724d6c24a3d24785870'
+            contentid: '5c2f1a7ad1210631b87faed0'
         },
         dataType: 'json',
         success: function(result) {
