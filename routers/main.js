@@ -74,8 +74,28 @@ router.get('/view', function (req, res){
 
         content.views++;
         content.save();
-
+        //console.log(data)
         res.render('main/view', data);
+        //res.json(data.content)
+        
+    });
+
+});
+
+router.get('/views', function (req, res){
+
+    var contentId = req.query.contentid || '';
+
+    Content.findOne({
+        _id: contentId
+    }).then(function (content) {
+        data.content = content;
+
+        content.save();
+        console.log(req.userInfo)
+        // res.render('main/view', data);
+        res.json(req.userInfo)
+        
     });
 
 });

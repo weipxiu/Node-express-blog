@@ -82,4 +82,17 @@ $(function() {
         });
     })
 
+    // 文章内容
+    $.ajax({
+        type: 'get',
+        url: '/views',
+        data: {
+            contentid: '5c272724d6c24a3d24785870'
+        },
+        dataType: 'json',
+        success: function(result) {
+            console.log('data',result)
+        }
+    })
+
 })
